@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
     return (
@@ -7,8 +7,8 @@ const Header = () => {
             <div className='container'>
                 <div className='d-flex justify-content-center'>
                     <nav>
-                        <Link className='me-3 text-' to='/creating'>Creat Todo</Link>
-                        <Link className='text-' to='/viewing'>View Todo</Link>
+                        <NavLink className='me-3 text-' to='/creating'>Creat Todo</NavLink>
+                        <NavLink className='text-' to='/viewing'>View Todo</NavLink>
                     </nav>
                 </div>
             </div>
