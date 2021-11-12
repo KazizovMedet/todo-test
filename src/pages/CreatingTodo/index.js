@@ -2,9 +2,13 @@ import React from 'react';
 import InputForm from "../../components/InputForm";
 import Button from "../../components/Button";
 import {useFormik} from 'formik';
+import { nanoid } from 'nanoid'
 import * as Yup from 'yup';
+import {useDispatch} from "react-redux";
+import {addTask} from "../../redux/action";
 
 const CreatingTodo = () => {
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -13,9 +17,10 @@ const CreatingTodo = () => {
             title: Yup.string()
                 .required('Введите текст'),
         }),
-        onSubmit: values => {
-            console.log(123)
-            alert(JSON.stringify(values, null, 2))
+        onSubmit: (values, {resetForm}) => {
+            values.id = nanoid(4)
+            dispatch(addTask(values))
+            resetForm()
         },
     })
     return (
@@ -29,7 +34,7 @@ const CreatingTodo = () => {
                                    id="title"
                                    name="title"
                                    onChange={formik.handleChange}
-                                   value={formik.values.name}
+                                   value={formik.values.title}
                         />
                         {formik.errors.title ?
                             <span className='text-danger fw-bolder'>{formik.errors.title}</span> : null}
